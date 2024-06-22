@@ -46,44 +46,62 @@ class _CounterFunctionScreenState extends State<CounterFunctionScreen> {
           ],
         ),
       ),
-      floatingActionButton: Column(
+      floatingActionButton:  Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          
-          FloatingActionButton(
-            shape: const StadiumBorder(),
-            onPressed: () {
+
+          CustomButton(
+            icon: Icons.exposure_minus_1_outlined, 
+            onPressed: (){
               setState(() {
-                clickCounter = 0;
+                if (clickCounter == 0) { return ;}
+                clickCounter -= 1 ;
               });
-            },
-            child: const Icon(Icons.refresh_outlined),
-          ),
+            }),
 
           const SizedBox(height: 10),
 
-          FloatingActionButton(
-            shape: const StadiumBorder(),
+          CustomButton(
+            icon: Icons.plus_one_outlined,
             onPressed: () {
               setState(() {
-                clickCounter += 1;
+                clickCounter += 1;                
               });
-            },
-            child: const Icon(Icons.plus_one_rounded),
-          ),
+            },),
           
           const SizedBox(height: 10),
 
-          FloatingActionButton(
+          CustomButton(
+            icon: Icons.refresh_outlined,
             onPressed: () {
               setState(() {
-                clickCounter -= 1;
+                clickCounter=0;
               });
-            },
-            child: const Icon(Icons.exposure_minus_1_rounded),
-          )
+            },)
         ],
       ),
+    );
+  }
+}
+
+
+
+
+class CustomButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onPressed;
+  
+  const CustomButton({
+    super.key,
+    required this.icon, 
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: onPressed,
+      child: Icon(icon),
     );
   }
 }
